@@ -1,4 +1,14 @@
 <resources>
-    <string name="app_name">ExpensesNotebook</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Caderno de Despesas</string>
+
+    <string name="action_settings">Configurações</string>
+
+    <string name="message_expense_created">Despesa criada com sucesso!</string>
+
+    <string name="label_description">Descrição</string>
+    <string name="label_amount">Valor</string>
+    <string name="label_category">Categoria</string>
+    <string name="label_date">Data</string>
+    <string name="label_place">Cidade</string>
+    <string name="button_save">Salvar</string>
 </resources>

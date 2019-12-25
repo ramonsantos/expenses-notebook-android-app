@@ -1,23 +1,34 @@
 package io.github.ramonsantos.expensesnotebook
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import io.github.ramonsantos.expensesnotebook.config.AppDatabase
+import io.github.ramonsantos.expensesnotebook.ui.ExpenseFormActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var appDatabase: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        appDatabase = AppDatabase.getInstance(applicationContext)
+
+        Toast.makeText(this, appDatabase.expenseDao().getAll().size.toString() , Toast.LENGTH_SHORT).show()
+
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            val intent = Intent(this, ExpenseFormActivity::class.java).apply {
+                putExtra("TESTE", "teste")
+            }
+            startActivity(intent)
         }
     }
 

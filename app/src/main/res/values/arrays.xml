@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cities">
+        <item>Surubim</item>
+        <item>Recife</item>
+    </string-array>
+
+    <string-array name="categories">
+        <item>Alimentação</item>
+        <item>Saúde</item>
+        <item>Transporte</item>
+        <item>Educação</item>
+        <item>Lazer</item>
+        <item>Energia Elétrica</item>
+        <item>Doações</item>
+        <item>Tarífas Bancárias</item>
+        <item>Telefonia</item>
+        <item>Animal de Estimação</item>
+        <item>Presentes</item>
+        <item>Vestuário e Cosmético</item>
+        <item>Gastos com Casa</item>
+        <item>Manutenção da Casa</item>
+        <item>Aluguel Moradia</item>
+    </string-array>
+</resources>
