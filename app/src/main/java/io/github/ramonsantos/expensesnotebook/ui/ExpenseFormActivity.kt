@@ -144,6 +144,6 @@ class ExpenseFormActivity : AppCompatActivity() {
         val category: String = categoriesSpinner.selectedItem.toString()
         val place: String = placeSpinner.selectedItem.toString()
 
-        return Expense(0, description, amount, category, place, "")
+        return Expense(0, description, amount, category, place)
     }
 }

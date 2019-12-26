@@ -10,6 +10,5 @@ data class Expense(
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "value") val value: Double,
     @ColumnInfo(name = "category") val category: String,
-    @ColumnInfo(name = "place") val place: String,
-    @ColumnInfo(name = "remark") val remark: String
+    @ColumnInfo(name = "place") val place: String
 )
