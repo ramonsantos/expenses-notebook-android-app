@@ -1,5 +1,6 @@
 package io.github.ramonsantos.expensesnotebook.ui
 
+import android.icu.text.NumberFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -25,8 +26,8 @@ class ExpenseViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun bind(expense: Expense) {
         expenseDescriptionTextView?.text = expense.description
-        expenseAmountTextView?.text = "${expense.value} R$"
-        expenseCategoryTextView?.text = expense.category
+        expenseAmountTextView?.text = "R$ ${amountToCurrencyFormat(expense.value)}"
+        expenseCategoryTextView?.text = "${expense.category}"
         expensePlaceAndDateTextView?.text = "${expense.place} - ${dateToString(expense.date)}"
     }
 
@@ -39,5 +40,9 @@ class ExpenseViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         return StringUtil.buildDateString(year, month, day)
+    }
+
+    private fun amountToCurrencyFormat(amount: Double) : String {
+        return NumberFormat.getCurrencyInstance().format(amount).replace("R","").replace("$","")
     }
 }
