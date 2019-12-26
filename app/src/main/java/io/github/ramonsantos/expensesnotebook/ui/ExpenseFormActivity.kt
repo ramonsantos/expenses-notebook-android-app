@@ -19,6 +19,7 @@ class ExpenseFormActivity : AppCompatActivity() {
     private lateinit var appDatabase: AppDatabase
     private lateinit var placeSpinner: Spinner
     private lateinit var categoriesSpinner: Spinner
+    private lateinit var dateValues: Array<Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,6 +106,7 @@ class ExpenseFormActivity : AppCompatActivity() {
             this,
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 date_value_text_view.text = buildDateString(year, monthOfYear, dayOfMonth)
+                dateValues = arrayOf(year, monthOfYear, dayOfMonth)
             },
             currentYear,
             currentMonth,
@@ -144,6 +146,12 @@ class ExpenseFormActivity : AppCompatActivity() {
         val category: String = categoriesSpinner.selectedItem.toString()
         val place: String = placeSpinner.selectedItem.toString()
 
-        return Expense(0, description, amount, category, place)
+
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.YEAR, dateValues[0])
+        calendar.set(Calendar.MONTH, dateValues[1])
+        calendar.set(Calendar.DAY_OF_MONTH, dateValues[2])
+
+        return Expense(0, description, amount, category, place, calendar.time)
     }
 }

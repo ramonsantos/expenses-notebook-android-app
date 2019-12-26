@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import io.github.ramonsantos.expensesnotebook.dao.ExpenseDao
 import io.github.ramonsantos.expensesnotebook.model.Expense
+import io.github.ramonsantos.expensesnotebook.util.Converters
 
 @Database(entities = [Expense::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun expenseDao(): ExpenseDao
 
