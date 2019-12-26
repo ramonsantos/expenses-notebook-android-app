@@ -12,6 +12,7 @@ import io.github.ramonsantos.expensesnotebook.R
 import io.github.ramonsantos.expensesnotebook.config.AppDatabase
 import io.github.ramonsantos.expensesnotebook.model.Expense
 import io.github.ramonsantos.expensesnotebook.util.Mask
+import io.github.ramonsantos.expensesnotebook.util.StringUtil
 import kotlinx.android.synthetic.main.activity_expense_form.*
 import java.util.*
 
@@ -99,13 +100,16 @@ class ExpenseFormActivity : AppCompatActivity() {
         val currentYear = calendar.get(Calendar.YEAR)
         val currentMonth = calendar.get(Calendar.MONTH)
         val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
+        dateValues = arrayOf(currentYear, currentMonth, currentDay)
 
-        date_value_text_view.text = buildDateString(currentYear, currentMonth, currentDay)
+        date_value_text_view.text =
+            StringUtil.buildDateString(currentYear, currentMonth, currentDay)
 
         val dpd = DatePickerDialog(
             this,
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                date_value_text_view.text = buildDateString(year, monthOfYear, dayOfMonth)
+                date_value_text_view.text =
+                    StringUtil.buildDateString(year, monthOfYear, dayOfMonth)
                 dateValues = arrayOf(year, monthOfYear, dayOfMonth)
             },
             currentYear,
@@ -115,28 +119,6 @@ class ExpenseFormActivity : AppCompatActivity() {
 
         pick_date_button.setOnClickListener { dpd.show() }
         date_value_text_view.setOnClickListener { dpd.show() }
-    }
-
-    private fun buildDateString(year: Int, month: Int, day: Int): String {
-        val months = arrayOf(
-            "Jan",
-            "Fev",
-            "Mar",
-            "Abr",
-            "Mai",
-            "Jun",
-            "Jul",
-            "Ago",
-            "Set",
-            "Out",
-            "Nov",
-            "Dez"
-        )
-
-        val dayValue = if (day < 10) "0$day" else "$day"
-        val monthValue = months[month]
-
-        return "$dayValue/$monthValue/$year"
     }
 
     private fun buildExpense(): Expense {

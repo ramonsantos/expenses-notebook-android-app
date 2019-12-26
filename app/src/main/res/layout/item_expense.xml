@@ -1,25 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:padding="16dp">
+    android:layout_gravity="center_horizontal">
 
     <TextView
         android:id="@+id/item_expense_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:paddingLeft="16dp"
-        android:text="title"
-        android:textStyle="bold"/>
+        android:text="Passagem 1002"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/item_expense_value"
+        android:id="@+id/item_expense_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:paddingLeft="16dp"
-        android:text="description"/>
-</LinearLayout>
+        android:text="2.896,35 R$"
+        app:layout_constraintBottom_toBottomOf="@+id/item_expense_place_and_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_expense_place_and_date" />
+
+    <TextView
+        android:id="@+id/item_expense_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categoria: Vestuário e Cosméticos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_expense_description" />
+
+    <TextView
+        android:id="@+id/item_expense_place_and_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Surubim - 20/09/2020"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_expense_category" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
