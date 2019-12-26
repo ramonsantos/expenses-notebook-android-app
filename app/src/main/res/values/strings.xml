@@ -4,11 +4,16 @@
     <string name="action_settings">Configurações</string>
 
     <string name="message_expense_created">Despesa criada com sucesso!</string>
+    <string name="message_ok">OK</string>
+    <string name="message_warning">Atenção</string>
+    <string name="message_the_field">O campo</string>
+    <string name="message_is_mandatory">é obrigatório</string>
 
     <string name="label_description">Descrição</string>
     <string name="label_amount">Valor</string>
     <string name="label_category">Categoria</string>
     <string name="label_date">Data</string>
     <string name="label_place">Cidade</string>
+
     <string name="button_save">Salvar</string>
 </resources>
