@@ -8,7 +8,7 @@ import io.github.ramonsantos.expensesnotebook.model.Expense
 
 @Dao
 interface ExpenseDao {
-    @Query("SELECT * FROM expense")
+    @Query("SELECT * FROM expense ORDER BY date LIMIT 50")
     fun getAll(): List<Expense>
 
     @Insert

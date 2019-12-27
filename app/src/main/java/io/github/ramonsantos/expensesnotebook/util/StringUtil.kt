@@ -23,5 +23,14 @@ class StringUtil {
 
             return "$dayValue/$monthValue/$year"
         }
+
+        fun buildDateStringOnlyNumbers(year: Int, month: Int, day: Int): String {
+            val numberMonth = month + 1
+
+            val dayValue = if (day < 10) "0$day" else "$day"
+            val monthValue = if (numberMonth < 10) "0$numberMonth" else "$numberMonth"
+
+            return "$dayValue/$monthValue/$year"
+        }
     }
 }

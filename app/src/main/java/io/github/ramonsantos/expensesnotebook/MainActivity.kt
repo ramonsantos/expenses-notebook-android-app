@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.ramonsantos.expensesnotebook.config.AppDatabase
 import io.github.ramonsantos.expensesnotebook.dao.ExpenseDao
+import io.github.ramonsantos.expensesnotebook.service.ExportExpensesByEmailIntentService
 import io.github.ramonsantos.expensesnotebook.ui.ExpenseFormActivity
 import io.github.ramonsantos.expensesnotebook.ui.ExpenseListAdapter
 import io.github.ramonsantos.expensesnotebook.ui.SettingsActivity
@@ -63,11 +64,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_settings -> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-                true
-            }
+            R.id.action_settings -> openSettingsActivity()
+
+            R.id.action_export_expenses_by_email -> runExportExpensesServiceByEmail()
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -75,5 +75,19 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         recyclerViewExpense.adapter = ExpenseListAdapter(expenseDao.getAll())
         super.onResume()
+    }
+
+    private fun openSettingsActivity(): Boolean {
+        startActivity(Intent(this, SettingsActivity::class.java))
+
+        return true
+    }
+
+    private fun runExportExpensesServiceByEmail(): Boolean {
+        startService(Intent(this, ExportExpensesByEmailIntentService::class.java).apply {
+            intent.action = "ExportExpensesByEmailIntentService"
+        })
+
+        return true
     }
 }

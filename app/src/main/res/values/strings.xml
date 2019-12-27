@@ -2,6 +2,7 @@
     <string name="app_name">Caderno de Despesas</string>
 
     <string name="action_settings">Configurações</string>
+    <string name="action_export_expenses_by_email">Exportar Despesas</string>
 
     <string name="message_expense_created">Despesa criada com sucesso!</string>
     <string name="message_settings_updated">Configurações atualizadas com sucesso!</string>
@@ -10,6 +11,7 @@
     <string name="message_the_field">O campo</string>
     <string name="message_is_mandatory">é obrigatório</string>
     <string name="message_email_format_invalid">Formato de e-mail inválido</string>
+    <string name="message_report_expense_subject">Relatório de Despesas</string>
 
     <string name="label_description">Descrição</string>
     <string name="label_amount">Valor</string>
