@@ -4,16 +4,22 @@
     <string name="action_settings">Configurações</string>
 
     <string name="message_expense_created">Despesa criada com sucesso!</string>
+    <string name="message_settings_updated">Configurações atualizadas com sucesso!</string>
     <string name="message_ok">OK</string>
     <string name="message_warning">Atenção</string>
     <string name="message_the_field">O campo</string>
     <string name="message_is_mandatory">é obrigatório</string>
+    <string name="message_email_format_invalid">Formato de e-mail inválido</string>
 
     <string name="label_description">Descrição</string>
     <string name="label_amount">Valor</string>
     <string name="label_category">Categoria</string>
     <string name="label_date">Data</string>
     <string name="label_place">Cidade</string>
+    <string name="label_send_email_to">Enviar e-mail para:</string>
 
     <string name="button_save">Salvar</string>
+
+    <string name="preference_send_to_email">io.github.ramonsantos.expensesnotebook.PREFERENCE_SEND_TO_EMAIL</string>
+    <string name="preference_send_to_email_key">io.github.ramonsantos.expensesnotebook.PREFERENCE_SEND_TO_EMAIL_KEY</string>
 </resources>
