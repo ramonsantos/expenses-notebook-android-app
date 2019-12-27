@@ -26,7 +26,7 @@ class ExpenseViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun bind(expense: Expense) {
         expenseDescriptionTextView?.text = expense.description
-        expenseAmountTextView?.text = "R$ ${amountToCurrencyFormat(expense.value)}"
+        expenseAmountTextView?.text = "R$ ${amountToCurrencyFormat(expense.amount)}"
         expenseCategoryTextView?.text = "${expense.category}"
         expensePlaceAndDateTextView?.text = "${expense.place} - ${dateToString(expense.date)}"
     }

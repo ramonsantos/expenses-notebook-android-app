@@ -10,9 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import io.github.ramonsantos.expensesnotebook.R
 import kotlinx.android.synthetic.main.activity_settings.*
 
-
 class SettingsActivity : AppCompatActivity() {
-
     private lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {

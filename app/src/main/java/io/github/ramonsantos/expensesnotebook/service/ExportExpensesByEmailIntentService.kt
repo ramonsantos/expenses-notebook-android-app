@@ -21,12 +21,27 @@ class ExportExpensesByEmailIntentService : IntentService("ExportExpensesByEmailI
     override fun onHandleIntent(intent: Intent?) {
         appDatabase = AppDatabase.getInstance(applicationContext)
         expenseDao = appDatabase.expenseDao()
+        var expenses = expenseDao.getAll()
 
-        sendEmail(
-            getEmailToSend(),
-            applicationContext.getString(R.string.message_report_expense_subject),
-            buildCSV(expenseDao.getAll())
-        )
+
+        try {
+            sendEmail(
+                getEmailToSend(),
+                applicationContext.getString(R.string.message_report_expense_subject),
+                buildCSV(expenses)
+            )
+            updateExpensesSentStatus(expenses, Expense.SENT_STATUS)
+        } catch (e: Exception) {
+            Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG).show()
+            updateExpensesSentStatus(expenses, Expense.TO_SEND_STATUS)
+        }
+    }
+
+    private fun updateExpensesSentStatus(expenses: List<Expense>, sentStatus: Long) {
+        expenses.forEach {
+            it.isSent = sentStatus
+            expenseDao.update(it)
+        }
     }
 
     private fun getEmailToSend(): String {
@@ -52,7 +67,7 @@ class ExportExpensesByEmailIntentService : IntentService("ExportExpensesByEmailI
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             csvContent.append(
-                "${it.description};${it.value};${StringUtil.buildDateStringOnlyNumbers(
+                "${it.description};${it.amount};${StringUtil.buildDateStringOnlyNumbers(
                     year,
                     month,
                     day
@@ -73,10 +88,6 @@ class ExportExpensesByEmailIntentService : IntentService("ExportExpensesByEmailI
         mIntent.putExtra(Intent.EXTRA_TEXT, message)
         mIntent.setPackage("com.google.android.gm")
 
-        try {
-            startActivity(Intent.createChooser(mIntent, "Choose Email Client..."))
-        } catch (e: Exception) {
-            Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG).show()
-        }
+        startActivity(Intent.createChooser(mIntent, "Choose Email Client..."))
     }
 }

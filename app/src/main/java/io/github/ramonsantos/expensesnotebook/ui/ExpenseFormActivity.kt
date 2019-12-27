@@ -134,6 +134,14 @@ class ExpenseFormActivity : AppCompatActivity() {
         calendar.set(Calendar.MONTH, dateValues[1])
         calendar.set(Calendar.DAY_OF_MONTH, dateValues[2])
 
-        return Expense(0, description, amount, category, place, calendar.time)
+        return Expense(
+            0,
+            description,
+            amount,
+            category,
+            place,
+            calendar.time,
+            Expense.TO_SEND_STATUS
+        )
     }
 }
