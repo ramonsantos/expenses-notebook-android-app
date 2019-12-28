@@ -16,13 +16,14 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         private var INSTANCE: AppDatabase? = null
+        private const val DATABASE_NAME: String = "expenses-database"
 
         fun getInstance(context: Context): AppDatabase {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(
                     context,
                     AppDatabase::class.java,
-                    "expenses-database"
+                    DATABASE_NAME
                 )
                     .allowMainThreadQueries()
                     .build()

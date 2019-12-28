@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import io.github.ramonsantos.expensesnotebook.R
+import io.github.ramonsantos.expensesnotebook.util.StringUtil
 import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingsActivity : AppCompatActivity() {
@@ -21,21 +22,20 @@ class SettingsActivity : AppCompatActivity() {
             getString(R.string.preference_send_to_email), Context.MODE_PRIVATE
         )
 
-        val emailToSend = sharedPref.getString(getString(R.string.preference_send_to_email_key), "")
-
-        send_email_to_edit_text.setText(emailToSend)
+        buildComponents()
     }
 
     fun saveSettings(view: View) {
         val email = send_email_to_edit_text.text.toString()
 
-        if (isValidEmail(email)) {
+        if (StringUtil.isValidEmail(email)) {
             val editor: Editor = sharedPref.edit()
             editor.putString(getString(R.string.preference_send_to_email_key), email)
             editor.commit()
 
             Toast.makeText(this, getString(R.string.message_settings_updated), Toast.LENGTH_SHORT)
                 .show()
+
             this.finish()
         } else {
             Toast.makeText(
@@ -46,7 +46,9 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    private fun isValidEmail(email: String): Boolean {
-        return email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    private fun buildComponents() {
+        val emailToSend = sharedPref.getString(getString(R.string.preference_send_to_email_key), "")
+
+        send_email_to_edit_text.setText(emailToSend)
     }
 }

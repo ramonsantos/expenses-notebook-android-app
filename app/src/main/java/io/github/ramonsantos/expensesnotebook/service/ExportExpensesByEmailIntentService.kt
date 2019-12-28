@@ -13,16 +13,20 @@ import io.github.ramonsantos.expensesnotebook.model.Expense
 import io.github.ramonsantos.expensesnotebook.util.StringUtil
 import java.util.*
 
-class ExportExpensesByEmailIntentService : IntentService("ExportExpensesByEmailIntentService") {
+class ExportExpensesByEmailIntentService : IntentService(EXPORT_EXPENSE_BY_EMAIL_SERVICE_ACTION) {
     private lateinit var appDatabase: AppDatabase
     private lateinit var expenseDao: ExpenseDao
     private lateinit var sharedPref: SharedPreferences
+
+    companion object {
+        const val EXPORT_EXPENSE_BY_EMAIL_SERVICE_ACTION: String =
+            "ExportExpensesByEmailIntentServiceAction"
+    }
 
     override fun onHandleIntent(intent: Intent?) {
         appDatabase = AppDatabase.getInstance(applicationContext)
         expenseDao = appDatabase.expenseDao()
         var expenses = expenseDao.getAll()
-
 
         try {
             sendEmail(
@@ -79,15 +83,17 @@ class ExportExpensesByEmailIntentService : IntentService("ExportExpensesByEmailI
     }
 
     private fun sendEmail(recipient: String, subject: String, message: String) {
-        val mIntent = Intent(Intent.ACTION_SEND)
+        val intent = Intent(Intent.ACTION_SEND)
 
-        mIntent.data = Uri.parse("mailto:")
-        mIntent.type = "text/plain"
-        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
-        mIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
-        mIntent.putExtra(Intent.EXTRA_TEXT, message)
-        mIntent.setPackage("com.google.android.gm")
+        intent.apply {
+            data = Uri.parse("mailto:")
+            type = "text/plain"
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+            putExtra(Intent.EXTRA_TEXT, message)
+            setPackage("com.google.android.gm")
+        }
 
-        startActivity(Intent.createChooser(mIntent, "Choose Email Client..."))
+        startActivity(Intent.createChooser(intent, "Choose Email Client..."))
     }
 }

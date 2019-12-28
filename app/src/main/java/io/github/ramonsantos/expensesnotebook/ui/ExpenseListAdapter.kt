@@ -13,6 +13,7 @@ class ExpenseListAdapter(private val list: List<Expense>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder {
         val inflater = LayoutInflater.from(parent.context)
+
         return ExpenseViewHolder(inflater, parent)
     }
 
@@ -25,6 +26,7 @@ class ExpenseListAdapter(private val list: List<Expense>) :
         } else {
             setBottomMargin(holder.itemView, 0)
         }
+
         val expense: Expense = list[position]
         holder.bind(expense)
     }

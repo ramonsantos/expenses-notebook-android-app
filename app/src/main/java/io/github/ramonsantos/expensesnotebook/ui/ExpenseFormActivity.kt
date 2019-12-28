@@ -26,12 +26,12 @@ class ExpenseFormActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expense_form)
 
-        buildComponents()
-
         appDatabase = AppDatabase.getInstance(applicationContext)
+
+        buildComponents()
     }
 
-    fun saveExpense(view: View) {
+    fun saveExpenseOnClick(view: View) {
         if (!validateForm()) {
             return
         }
@@ -64,35 +64,35 @@ class ExpenseFormActivity : AppCompatActivity() {
     }
 
     private fun buildComponents() {
+        buildAmountEditText()
         buildCategorySpinner()
         buildPlaceSpinner()
         buildDatePicker()
+    }
 
+    private fun buildAmountEditText() {
         amount_edit_text.addTextChangedListener(Mask.moneyMask(amount_edit_text))
+    }
+
+    private fun buildSpinner(spinner: Spinner, optionsArrayResource: Int) {
+        ArrayAdapter.createFromResource(
+            this,
+            optionsArrayResource,
+            android.R.layout.simple_spinner_dropdown_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
     }
 
     private fun buildCategorySpinner() {
         categoriesSpinner = category_spinner
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.categories,
-            android.R.layout.simple_spinner_dropdown_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            categoriesSpinner.adapter = adapter
-        }
+        buildSpinner(categoriesSpinner, R.array.categories)
     }
 
     private fun buildPlaceSpinner() {
         placeSpinner = place_spinner
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.cities,
-            android.R.layout.simple_spinner_dropdown_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            placeSpinner.adapter = adapter
-        }
+        buildSpinner(place_spinner, R.array.cities)
     }
 
     private fun buildDatePicker() {
@@ -127,7 +127,6 @@ class ExpenseFormActivity : AppCompatActivity() {
             amount_edit_text.text.toString().replace(".", "").replace(",", ".").toDouble()
         val category: String = categoriesSpinner.selectedItem.toString()
         val place: String = placeSpinner.selectedItem.toString()
-
 
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.YEAR, dateValues[0])

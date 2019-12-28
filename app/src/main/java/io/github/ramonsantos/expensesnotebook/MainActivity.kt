@@ -16,7 +16,6 @@ import io.github.ramonsantos.expensesnotebook.ui.ExpenseListAdapter
 import io.github.ramonsantos.expensesnotebook.ui.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var appDatabase: AppDatabase
     private lateinit var expenseDao: ExpenseDao
@@ -32,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         appDatabase = AppDatabase.getInstance(applicationContext)
         expenseDao = appDatabase.expenseDao()
-
         viewManager = LinearLayoutManager(this)
         viewAdapter = ExpenseListAdapter(appDatabase.expenseDao().getAll())
 
@@ -51,10 +49,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        fab.setOnClickListener { view ->
-            val intent = Intent(this, ExpenseFormActivity::class.java)
-            startActivity(intent)
-        }
+        fab.setOnClickListener { _ -> openExpenseFormActivity() }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -77,6 +72,10 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
     }
 
+    private fun openExpenseFormActivity() {
+        startActivity(Intent(this, ExpenseFormActivity::class.java))
+    }
+
     private fun openSettingsActivity(): Boolean {
         startActivity(Intent(this, SettingsActivity::class.java))
 
@@ -85,7 +84,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun runExportExpensesServiceByEmail(): Boolean {
         startService(Intent(this, ExportExpensesByEmailIntentService::class.java).apply {
-            intent.action = "ExportExpensesByEmailIntentService"
+            intent.action =
+                ExportExpensesByEmailIntentService.EXPORT_EXPENSE_BY_EMAIL_SERVICE_ACTION
         })
 
         return true

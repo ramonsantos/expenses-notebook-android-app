@@ -154,7 +154,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
         android:background="?android:attr/selectableItemBackground"
-        android:onClick="saveExpense"
+        android:onClick="saveExpenseOnClick"
         android:text="@string/button_save"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
